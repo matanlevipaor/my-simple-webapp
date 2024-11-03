@@ -55,7 +55,7 @@ jobs:
 
     - name: Create Container for Terraform State
       run: |
-        az storage container create --name tfstate --account-name terraformbackend
+        az storage container create --name tfstate --account-name terraformbackend12345
 
     - name: Terraform Init
       working-directory: ./infrastructure
