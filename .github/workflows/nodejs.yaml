@@ -51,7 +51,7 @@ jobs:
 
     - name: Create Storage Account for Backend
       run: |
-        az storage account create --name terraformbackend --resource-group terraform-backend-rg --location "East US" --sku Standard_LRS
+        az storage account create --name terraformbackend12345 --resource-group terraform-backend-rg --location "East US" --sku Standard_LRS
 
     - name: Create Container for Terraform State
       run: |
