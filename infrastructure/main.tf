@@ -35,7 +35,7 @@ output "app_service_default_hostname" {
 terraform {
   backend "azurerm" {
     resource_group_name  = "terraform-backend-rg"
-    storage_account_name = "terraformbackend"
+    storage_account_name = "terraformbackend12345"
     container_name       = "tfstate"
     key                  = "terraform.tfstate"
   }
