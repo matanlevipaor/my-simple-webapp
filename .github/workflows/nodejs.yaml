@@ -45,23 +45,21 @@ jobs:
       with:
         terraform_version: 1.5.0
 
-    - name: Create Resource Group for Backend
-      run: |
-        az group create --name terraform-backend-rg --location "East US"
-
-    - name: Create Storage Account for Backend
-      run: |
-        az storage account create --name terraformbackend12345 --resource-group terraform-backend-rg --location "East US" --sku Standard_LRS
-
-    - name: Create Container for Terraform State
-      run: |
-        az storage container create --name tfstate --account-name terraformbackend12345
-
     - name: Terraform Init
+      env:
+        ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       working-directory: ./infrastructure
       run: terraform init
 
     - name: Terraform Apply
+      env:
+        ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+        ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       working-directory: ./infrastructure
       run: terraform apply -auto-approve
 
