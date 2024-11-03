@@ -45,6 +45,18 @@ jobs:
       with:
         terraform_version: 1.5.0
 
+    - name: Create Resource Group for Backend
+      run: |
+        az group create --name terraform-backend-rg --location "East US"
+
+    - name: Create Storage Account for Backend
+      run: |
+        az storage account create --name terraformbackend --resource-group terraform-backend-rg --location "East US" --sku Standard_LRS
+
+    - name: Create Container for Terraform State
+      run: |
+        az storage container create --name tfstate --account-name terraformbackend
+
     - name: Terraform Init
       working-directory: ./infrastructure
       run: terraform init
