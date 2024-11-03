@@ -32,3 +32,11 @@ resource "azurerm_app_service" "app" {
 output "app_service_default_hostname" {
   value = azurerm_app_service.app.default_site_hostname
 }
+terraform {
+  backend "azurerm" {
+    resource_group_name  = "terraform-backend-rg"
+    storage_account_name = "terraformbackend"
+    container_name       = "tfstate"
+    key                  = "terraform.tfstate"
+  }
+}
